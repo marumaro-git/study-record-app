@@ -1,0 +1,27 @@
+version: "3.1"
+
+# mysqlの設定
+services:
+  db:
+    image: mysql:8.0
+    container_name: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: study_record
+      MYSQL_USER: dev_go_api
+      MYSQL_PASSWORD: dev_go_api
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ../mysql/init:/docker-entrypoint-initdb.d
+    command: "--character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci"
+  adminer:
+    image: adminer
+    container_name: adminer
+    restart: always
+    ports:
+      - "8099:8080"
+volumes:
+  db_data:
