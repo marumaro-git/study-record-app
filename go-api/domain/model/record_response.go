@@ -5,4 +5,5 @@ type Record struct {
 	Item      string `json:"item"`
 	Content   string `json:"content"`
 	StudyDate string `json:"study_date"`
+	CreatedAt string `json:"created_at"`
 }

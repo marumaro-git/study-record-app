@@ -13,7 +13,7 @@ type DBAccessor struct {
 }
 
 func (da DBAccessor) GetRecord(r *http.Request) ([]model.Record, error) {
-	query := "SELECT id, item, content, study_date FROM record WHERE 1 = 1"
+	query := "SELECT id, item, content, study_date, create_datetime FROM record WHERE 1 = 1"
 	params := []interface{}{}
 
 	// パラメータ取得
@@ -39,7 +39,7 @@ func (da DBAccessor) GetRecord(r *http.Request) ([]model.Record, error) {
 	var records []model.Record
 	for rows.Next() {
 		var record model.Record
-		err := rows.Scan(&record.Id, &record.Item, &record.Content, &record.StudyDate)
+		err := rows.Scan(&record.Id, &record.Item, &record.Content, &record.StudyDate, &record.CreatedAt)
 		if err != nil {
 			panic(err.Error())
 		}
